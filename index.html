@@ -2238,16 +2238,6 @@
               <div class="range-head"><span>An wie vielen von 10 Tagen trinke ich ausschließlich Wasser?</span><span class="range-value" id="waterGoalValue">3/10</span></div>
               <input id="waterGoal" type="range" min="0" max="10" step="1" value="3">
             </div>
-            <div class="field-grid" style="margin-top:12px;">
-              <label class="field">
-                <span class="field-label">Wenn ...</span>
-                <input id="ifTrigger" type="text" value="ich morgens müde bin">
-              </label>
-              <label class="field">
-                <span class="field-label">Dann ...</span>
-                <input id="thenAction" type="text" value="trinke ich zuerst Wasser und esse etwas">
-              </label>
-            </div>
             <label class="field" style="margin-top:12px;">
               <span class="field-label">Was könnte schwierig werden?</span>
               <textarea id="ownNote">Schwierigkeit: Müdigkeit, Geschmack, Freunde, Verfügbarkeit oder Stress. Meine Lösung: Ich entscheide vorher, nicht erst im Moment.</textarea>
@@ -2461,7 +2451,7 @@
     }
 
     function bindPlan() {
-      ["studentName", "energyGoal", "softGoal", "waterGoal", "ifTrigger", "thenAction", "ownNote"].forEach(id => {
+      ["studentName", "energyGoal", "softGoal", "waterGoal", "ownNote"].forEach(id => {
         document.getElementById(id).addEventListener("input", makePlan);
       });
       document.getElementById("makePlan").addEventListener("click", makePlan);
@@ -2547,8 +2537,6 @@
       const energyGoal = numberValue("energyGoal");
       const softGoal = numberValue("softGoal");
       const waterGoal = numberValue("waterGoal");
-      const ifTrigger = document.getElementById("ifTrigger").value.trim() || "ich müde bin";
-      const thenAction = document.getElementById("thenAction").value.trim() || "trinke ich zuerst Wasser";
       const own = document.getElementById("ownNote").value.trim();
       document.getElementById("energyGoalValue").textContent = energyGoal;
       document.getElementById("softGoalValue").textContent = softGoal;
@@ -2568,7 +2556,6 @@
         <p>Ich trinke in den nächsten 10 Tagen insgesamt maximal <strong>${energyGoal}</strong> Energydrink${energyGoal === 1 ? "" : "s"}.</p>
         <p>Ich trinke in den nächsten 10 Tagen insgesamt maximal <strong>${softGoal}</strong> Softdrink${softGoal === 1 ? "" : "s"}.</p>
         <p>Ich trinke an mindestens <strong>${waterGoal} von 10 Tagen</strong> ausschließlich Wasser.</p>
-        <p><strong>Wenn</strong> ${escapeHtml(ifTrigger)}, <strong>dann</strong> ${escapeHtml(thenAction)}.</p>
         <p>${escapeHtml(own)}</p>
         <table class="check-table">
           <thead>
@@ -2585,8 +2572,6 @@
       const energyGoal = numberValue("energyGoal");
       const softGoal = numberValue("softGoal");
       const waterGoal = numberValue("waterGoal");
-      const ifTrigger = document.getElementById("ifTrigger").value.trim() || "ich müde bin";
-      const thenAction = document.getElementById("thenAction").value.trim() || "trinke ich zuerst Wasser";
       const own = document.getElementById("ownNote").value.trim();
       const text = [
         "Mein 10-Tage-Plan",
@@ -2595,7 +2580,6 @@
         `Ich trinke in den nächsten 10 Tagen insgesamt maximal ${energyGoal} Energydrink${energyGoal === 1 ? "" : "s"}.`,
         `Ich trinke in den nächsten 10 Tagen insgesamt maximal ${softGoal} Softdrink${softGoal === 1 ? "" : "s"}.`,
         `Ich trinke an mindestens ${waterGoal} von 10 Tagen ausschließlich Wasser.`,
-        `Wenn ${ifTrigger}, dann ${thenAction}.`,
         own ? `Schwierigkeit/Lösung: ${own}` : "",
         "",
         "Kontrolle:",
